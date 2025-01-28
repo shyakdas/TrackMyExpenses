@@ -1,36 +1,41 @@
 package org.trackmyexpenses.project
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-import trackmyexpenses.composeapp.generated.resources.Res
-import trackmyexpenses.composeapp.generated.resources.planning_ahead
+/**
+ * This file defines the main composable function for the application.
+ * It sets up the theme and provides a simple UI with a button that toggles content visibility.
+ */
 
 @Composable
 @Preview
 fun App() {
-    MaterialTheme {
+    // Apply the custom theme to the application
+    MyTheme(darkTheme = false) {
+        // State variable to track the visibility of the content
         var showContent by remember { mutableStateOf(false) }
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+
+        // Column layout to arrange the UI elements vertically
+        Column(
+            modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.background),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            // Button to toggle the content visibility
             Button(onClick = { showContent = !showContent }) {
                 Text("Click me!")
-            }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Image(painterResource(Res.drawable.planning_ahead), null)
-                    Text("Compose: $greeting")
-                }
             }
         }
     }
