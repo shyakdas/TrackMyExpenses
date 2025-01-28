@@ -14,7 +14,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import trackmyexpenses.composeapp.generated.resources.Res
-import trackmyexpenses.composeapp.generated.resources.compose_multiplatform
+import trackmyexpenses.composeapp.generated.resources.planning_ahead
 
 @Composable
 @Preview
@@ -28,7 +28,7 @@ fun App() {
             AnimatedVisibility(showContent) {
                 val greeting = remember { Greeting().greet() }
                 Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
+                    Image(painterResource(Res.drawable.planning_ahead), null)
                     Text("Compose: $greeting")
                 }
             }
