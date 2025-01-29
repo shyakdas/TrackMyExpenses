@@ -13,7 +13,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.trackmyexpenses.project.ui.screens.AccountSetUpScreen
+import org.trackmyexpenses.project.ui.screens.ConfirmPingUpScreen
+import org.trackmyexpenses.project.ui.screens.HomeScreen
+import org.trackmyexpenses.project.ui.screens.OnBoardingScreen
+import org.trackmyexpenses.project.ui.screens.PingSetUpScreen
+import org.trackmyexpenses.project.ui.screens.SuccessfullySetupDone
 
 /**
  * This file defines the main composable function for the application.
@@ -25,18 +34,14 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun App() {
     // Apply the custom theme to the application
     MyTheme(darkTheme = false) {
-        // State variable to track the visibility of the content
-        var showContent by remember { mutableStateOf(false) }
-
-        // Column layout to arrange the UI elements vertically
-        Column(
-            modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.background),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            // Button to toggle the content visibility
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-            }
+        val navController = rememberNavController()
+        NavHost(navController = navController, startDestination = "onBoardingScreen") {
+            composable("onBoardingScreen") { OnBoardingScreen(navController) }
+            composable("pingSetUpScreen") { PingSetUpScreen(navController) }
+            composable("confirmPingUpScreen") { ConfirmPingUpScreen(navController) }
+            composable("accountSetUpScreen") { AccountSetUpScreen(navController) }
+            composable("successfullySetupDone") { SuccessfullySetupDone(navController) }
+            composable("homeScreen") { HomeScreen() }
         }
     }
 }
